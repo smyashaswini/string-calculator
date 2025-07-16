@@ -33,11 +33,11 @@ class CalculatorControllerTest < ActionDispatch::IntegrationTest
     assert_equal 15, body["result"]
   end
 
-  test 'should handle newlines as delimiters' do
-    get "/calculator/add", params: { input_string: "4\n5,8" }
+  test 'should handle various delimiters of any length including newline semicolon and //' do
+    get "/calculator/add", params: { input_string: "//1;2,3\n4abc8*$10****5***7" }
     assert_response :success
 
     body = JSON.parse(response.body)
-    assert_equal 17, body["result"]
+    assert_equal 40, body["result"]
   end
 end

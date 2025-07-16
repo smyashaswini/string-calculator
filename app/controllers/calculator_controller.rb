@@ -11,7 +11,8 @@ class CalculatorController < ApplicationController
   def calculate_sum(input_string)
     return 0 if input_string.empty?
 
-    numbers = input_string.split(/,|\n/).map(&:to_i)
+    delimiter_regex = /\/\/|[a-zA-Z,;\n\/\|\:\-\t\\\.\&%\$\*\s]/ # Not included all delimiters here. Just an example with some common delimiters.
+    numbers = input_string.split(delimiter_regex).map(&:to_i)
     numbers.sum
   end
 end
