@@ -23,6 +23,9 @@ class CalculatorController < ApplicationController
       raise StandardError, "Negatives not allowed: #{negatives.join(', ')}"
     end
 
-    numbers.sum
+    # Filter out numbers bigger than 1000
+    valid_numbers = numbers.select { |num| num <= 1000 }
+
+    valid_numbers.sum
   end
 end

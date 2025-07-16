@@ -48,4 +48,12 @@ class CalculatorControllerTest < ActionDispatch::IntegrationTest
     body = JSON.parse(response.body)
     assert_equal "Negatives not allowed: -2, -4", body["error"]
   end
+
+  test 'should ignore numbers greater than 1000' do
+    get "/calculator/add", params: { input_string: "1001,2,3" }
+    assert_response :success
+
+    body = JSON.parse(response.body)
+    assert_equal 5, body["result"]
+  end
 end
