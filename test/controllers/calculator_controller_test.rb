@@ -8,4 +8,20 @@ class CalculatorControllerTest < ActionDispatch::IntegrationTest
     body = JSON.parse(response.body)
     assert_equal 0, body["result"]
   end
+
+  test 'should return the input number when a single number is provided' do
+    get "/calculator/add", params: { input_string: "5" }
+    assert_response :success
+
+    body = JSON.parse(response.body)
+    assert_equal 5, body["result"]
+  end
+
+  test 'should return the sum of two numbers' do
+    get "/calculator/add", params: { input_string: "3,7" }
+    assert_response :success
+
+    body = JSON.parse(response.body)
+    assert_equal 10, body["result"]
+  end
 end
