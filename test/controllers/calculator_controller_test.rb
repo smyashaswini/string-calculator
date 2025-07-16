@@ -32,4 +32,12 @@ class CalculatorControllerTest < ActionDispatch::IntegrationTest
     body = JSON.parse(response.body)
     assert_equal 15, body["result"]
   end
+
+  test 'should handle newlines as delimiters' do
+    get "/calculator/add", params: { input_string: "4\n5,8" }
+    assert_response :success
+
+    body = JSON.parse(response.body)
+    assert_equal 17, body["result"]
+  end
 end
