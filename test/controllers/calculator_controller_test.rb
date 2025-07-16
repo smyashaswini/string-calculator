@@ -40,4 +40,12 @@ class CalculatorControllerTest < ActionDispatch::IntegrationTest
     body = JSON.parse(response.body)
     assert_equal 40, body["result"]
   end
+
+  test 'should raise error for negative numbers' do
+    get "/calculator/add", params: { input_string: "1,-2,3,-4" }
+    assert_response :bad_request
+
+    body = JSON.parse(response.body)
+    assert_equal "Negatives not allowed: -2, -4", body["error"]
+  end
 end
