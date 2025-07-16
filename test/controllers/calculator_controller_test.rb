@@ -24,4 +24,12 @@ class CalculatorControllerTest < ActionDispatch::IntegrationTest
     body = JSON.parse(response.body)
     assert_equal 10, body["result"]
   end
+
+  test 'should return the sum of multiple numbers' do
+    get "/calculator/add", params: { input_string: "1,2,3,4,5" }
+    assert_response :success
+
+    body = JSON.parse(response.body)
+    assert_equal 15, body["result"]
+  end
 end

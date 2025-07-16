@@ -11,8 +11,7 @@ class CalculatorController < ApplicationController
   def calculate_sum(input_string)
     return 0 if input_string.empty?
 
-    input_1 = input_string.split(",")[0].to_i
-    input_2 = input_string.split(",")[1].to_i
-    input_1 + input_2
+    numbers = input_string.split(',').map(&:to_i)
+    numbers.sum
   end
 end
