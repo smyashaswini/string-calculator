@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  get "/calculator/add", to: "calculator#add"
+  post "/calculator/add", to: "calculator#add"
 end
